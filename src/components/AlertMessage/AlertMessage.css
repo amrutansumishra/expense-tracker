@@ -1,0 +1,40 @@
+.alert-card-parent{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgb(242, 242, 242,0.4 );
+}
+.alert-card{
+    padding: 32px;
+    background-color: #f0f2f9;
+    transition: all 1s;
+    position: absolute;
+    left:50%;
+    top:25%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+.alert-header{
+    font-size: 1.2rem;
+    padding: 16px;
+}
+.alert-action{
+    display: flex;
+    justify-content: space-around;
+    gap:20px;
+    padding: 16px;
+}
+.alert-action button{
+    padding: 10px;
+    width: 80px;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.alert-action .cancel{
+    background-color: rgb(186, 10, 10);
+}
+.alert-action .confirm{
+    background-color: #0c915e;
+}

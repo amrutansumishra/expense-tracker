@@ -1,0 +1,110 @@
+.profile{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.profile-card{
+    width: 90%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 32px;
+    
+}
+.profile-card-body{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: #dfe1f3;
+    border-radius: 10px;
+}
+.profile-header{
+    position: relative;
+}
+.profile-img-edit{
+    background: #ebeced;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 120px;
+    outline: none;
+    border: none;
+}
+.profile-img-edit input[type="file"]{  
+    position: absolute;
+  left: -9999px;
+  z-index: -100;
+}
+.profile-image{
+    display: flex;
+    justify-content: center;
+    border:5px solid #ffffff;
+    border-radius: 50%;
+    width: 150px;
+    overflow: hidden;
+    margin: 20px 10px -80px 32px;
+    z-index: 20;
+}
+.profile-image img{
+    height: 150px;
+}
+.profile-details{
+    padding-top:50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 16px 32px;
+}
+.profile-update-button button{
+    background-color: #122080;
+    padding: 12px 10px;
+    color:#dfe1f3;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+}
+.profile-form-group input, .profile-title input{
+    display: block;
+    min-width: 300px;
+    height: 34px;
+    padding: 4px 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    margin:10px 0;
+    transition: background-color .218s,border-color .218s;
+}
+.profile-form-group label{
+   display: flex;
+   gap:5px;
+}
+.profile-form-group button{
+    background: none;
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+ }
+.profile-form-group label img{
+    height: 16px;
+ }
+.profile-title h2{
+    display: flex;
+    justify-content: left; 
+    gap: 5px;
+}
+.profile-title h2 button{
+    background: none;
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+}
+
