@@ -1,0 +1,121 @@
+.expense-card{
+    border-radius: 8px;
+    width: 75%;
+    margin: 0 32px 0 0px;
+}
+.expense-show-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:16px;
+    
+}
+.expense-show-card-main-header{
+  font-size: 16px;
+  color:#737373;
+  padding:16px 0 16px 16px;
+}
+
+.expense-show-card-body{
+    padding: 8px;
+    border-radius: 8px;
+    width: 30%;
+    background-color: #ffffff;
+    
+}
+
+.expense-show-card-header{
+  font-size: 16px;
+  color:#737373;
+  /* background-color:  #f6f7fb; */
+  background-color: #ebedff;
+  border-radius: 10px;
+  padding: 8px;
+}
+.expense-amount{
+  padding: 8px;
+  font-size: 1.7rem;
+  color: #626262;
+}
+
+.expense-table{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+.expense-table table{
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  .table-header{
+    background-color: #f6f7fb;
+    color:#a2a1a1;
+    border-radius: 8px;
+    padding: 8px
+  }
+  th:first-child{
+    border-radius: 8px 0 0 8px;
+  }
+  th:last-child{
+    border-radius:0 8px 8px 0;
+  }
+  th{
+    padding: 10px;
+    text-align: left;
+    font-weight: 500;
+    
+  }
+  
+  tr:hover{
+    background-color: #f6f7fb;
+    border-radius: 8px;
+  }
+
+ td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ece9e9;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #909090;
+  }
+  .filter-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:16px 0 16px 16px;
+  }
+  .filter-header{
+    color:#737373;
+  }
+  .filter-options{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+
+  }
+  .action-button button{
+        background-color: #ffffff;
+        color: #a2a1a1;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+  }
+
+  .filter-select select{
+        background-color: #ffffff;
+        color: #a2a1a1;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0;
+  }

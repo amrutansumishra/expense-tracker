@@ -1,0 +1,150 @@
+$color-background: #dfe1f3;
+$color-background-dark: #122080;
+
+.expense-section{
+    display: flex;
+    flex-direction: column;
+    padding: 0 32px;
+    gap: 5%;
+    width: 25%;
+}
+.expense-add-form{
+    width: 100%; 
+    background-color: #ffffff;
+    border-radius: 4px;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap:15px;
+        min-width: 280px;
+        margin: 0 10px;
+        min-height: 300px;
+    }
+    .form-input{
+        width: -webkit-fill-available;
+        height: 34px;
+        padding: 4px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        transition: background-color .218s,border-color .218s;
+    }
+    .input-group-select select{
+        width: -webkit-fill-available;
+        height: 34px;
+        padding: 4px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        -moz-box-sizing: content-box;
+    -webkit-box-sizing:content-box;
+        box-sizing: content-box;
+        transition: background-color .218s,border-color .218s;
+    }
+    .submit-btn button{
+        background-color: #122080;
+        color:#dfe1f3;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 14px;
+        outline: none;
+        cursor: pointer;
+        border: none;
+        letter-spacing: 0.25px;
+        height: 40px;
+        width: 100%;
+        padding: 6px 12px;
+        transition: background-color .218s,border-color .218s;
+    }
+    .form-input-date{
+        height: 25px;
+        width: 25px;
+        position: absolute;
+        top: 10px;
+        right:10px;
+        bottom: 2px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    .input-group-name{
+        position: relative;
+    }
+    .datepicker-input {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 30px;
+        height: 30px;
+        opacity: 0;
+        // box-sizing: border-box;
+      }
+      .datepicker-input::-webkit-calendar-picker-indicator {
+        position: absolute;
+        z-index: 1000;
+        top: 10px;
+        right:10px;
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+      } 
+    
+}
+
+.expense-section p{
+    color:#a2a1a1;
+}
+.expense-footer{
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+.expense-chart{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.expense-add-button{
+    button{
+        width: 100%;
+        background-color: #ffffff;
+        color: #a2a1a1;
+        border: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        gap:10px;
+        border-radius:16px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+}
+.expense-footer-actions{
+    display: flex;
+    justify-content: space-around;
+    background-color: $color-background;
+    padding: 16px;
+    border-radius: 8px;
+    
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:12px;
+        color: $color-background-dark;
+        font-size: 14px;
+    }
+
+    div button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+    }
+}
