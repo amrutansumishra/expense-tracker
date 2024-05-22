@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-const GoogleSignUp = () => {
+const GoogleSignIn = () => {
     const handleCallbackResponse =()=>{
 
     }
     
     useEffect(()=>{
-   
         const google = window.google
           google.accounts.id.initialize({
-            client_id:"497536317508-5eehhd10pmuem7ipk275lpqdccat8jlc.apps.googleusercontent.com",
+            
+            client_id:process.env.REACT_APP_GOOGLE_CLINT_ID,
             callback: handleCallbackResponse
           })
       
@@ -18,11 +18,10 @@ const GoogleSignUp = () => {
             {theme:"outline",size:"large",width: "300", logo_alignment: "center"}
           )
         
-        
       },[])
   return (
     <div id="signIn"></div>
   )
 }
 
-export default GoogleSignUp
+export default GoogleSignIn
