@@ -1,6 +1,6 @@
 import React,{useEffect,useState,memo} from 'react'
 
-const ReSendBtn = ({active,email}) => {
+const Otp = ({active,email}) => {
     const [isButtonDisabled, setButtonDisabled] = useState(true);
     const [counter, setCounter] = useState();
 
@@ -16,7 +16,7 @@ const ReSendBtn = ({active,email}) => {
     console.log("btn")
     useEffect(()=>{
         sendOtpEmail(email)
-    },[])
+    },[email])
     useEffect(() => {
         let timer;
     
@@ -28,7 +28,7 @@ const ReSendBtn = ({active,email}) => {
         // Cleanup interval on component unmount
         return () => clearInterval(timer);
         
-      }, [counter, active]);
+      }, [counter, active,isButtonDisabled]);
  
     
       useEffect(() => {
@@ -43,4 +43,4 @@ const ReSendBtn = ({active,email}) => {
   )
 }
 
-export default memo(ReSendBtn)
+export default memo(Otp)

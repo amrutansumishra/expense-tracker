@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './SideBar.css'
-import 'boxicons';
-import home from './home.svg'
-import detail from './detail.svg'
-import poweroff from './poweroff.svg'
 import { Link } from 'react-router-dom';
 import Logout from '../Logout/Logout';
+import './SideBar.css'
+import 'boxicons';
+import home from '../../assets/icons/home.svg'
+import detail from '../../assets/icons/detail.svg'
+import poweroff from '../../assets/icons/poweroff.svg'
 
 const SideBar = () => {
 

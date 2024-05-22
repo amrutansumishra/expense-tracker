@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Expense.scss'
 import { Doughnut } from 'react-chartjs-2';
 import {Chart,ArcElement,Legend} from 'chart.js';
-import calendar from './calendar.svg';
+import calendar from '../../assets/icons/calendar.svg';
 
 Chart.register(ArcElement,Legend);
 
