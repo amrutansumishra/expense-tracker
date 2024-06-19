@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react'
+import { GoogleLogin,GoogleOAuthProvider } from '@react-oauth/google';
+import {jwtDecode} from 'jwt-decode';
 
 const GoogleSignUp = () => {
-    const handleCallbackResponse =()=>{
 
+    const handleSignUp =(res)=>{
+      console.log(jwtDecode(res.credential))
     }
     
-    useEffect(()=>{
-   
-        const google = window.google
-          google.accounts.id.initialize({
-            client_id:"497536317508-5eehhd10pmuem7ipk275lpqdccat8jlc.apps.googleusercontent.com",
-            callback: handleCallbackResponse
-          })
-      
-          google.accounts.id.renderButton(
-            document.getElementById("signIn"),
-            {theme:"outline",size:"large",width: "300", logo_alignment: "center"}
-          )
-        
-        
-      },[])
+
   return (
-    <div id="signIn"></div>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLINT_ID}>
+      <GoogleLogin
+          width="300px"
+          text="signup_with"
+          onSuccess={credentialResponse => {
+            handleSignUp(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+      />
+    </GoogleOAuthProvider>
   )
 }
 

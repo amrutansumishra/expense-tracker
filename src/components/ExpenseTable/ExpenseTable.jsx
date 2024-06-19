@@ -1,26 +1,43 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './ExpenseTable.css'
 import 'boxicons';
 import Notification from '../Notification/Notification';
+import { fetchExpense } from '../../services/services';
 
-const ExpenseTable = () => {
+const ExpenseTable = ({children}) => {
+  const [expenseData,setExpenseData] = useState()
+  const getExpenses = ()=>{
+    const result = fetchExpense()
+    if(result){
+      setExpenseData([{name:"Cafe",
+        category:"Dining",
+        date:"20/06/2024",
+        amount:250
+      },{name:"Cafe",
+        category:"Dining",
+        date:"20/06/2024",
+        amount:250
+      },{name:"Cafe",
+        category:"Dining",
+        date:"20/06/2024",
+        amount:250
+      },{name:"Cafe",
+        category:"Dining",
+        date:"20/06/2024",
+        amount:250
+      },{name:"Cafe",
+        category:"Dining",
+        date:"20/06/2024",
+        amount:250
+      }])
+    }
+  }
+  useEffect(()=>{
+    getExpenses()
+  },[])
   return (
     <div className='expense-card'>
-        <div className='expense-show-card-main-header'>Expense Summary</div>
-        <div className='expense-show-card'>     
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>This Week</div>
-                <div className='expense-amount'>$7000</div>
-            </div>
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>This Month</div>
-                <div className='expense-amount'>$10000</div>
-            </div>
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>Last Month</div>
-                <div className='expense-amount'>$9000</div>
-            </div>
-        </div>
+        {children}
         <div className='expense-table-card'>
           <Notification/>
         <div className='filter-row'>
@@ -55,6 +72,13 @@ const ExpenseTable = () => {
         <th>Date</th>
         <th>Amount</th>
       </tr>
+      {expenseData?expenseData.map((data,index)=>
+        <tr key={`expense-row-${index}`}>
+          <td>{data.name}</td>
+          <td>{data.category}</td>
+          <td>{data.date}</td>
+          <td><span>&#8377;</span>{data.amount}</td>
+        </tr>):<></>}
       <tr>
         <td>Peter</td>
         <td>Griffin</td>

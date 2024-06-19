@@ -5,6 +5,7 @@ import wave from "../../assets/icons/wave.svg";
 import Notification from "../../components/Notification/Notification";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
 import Otp from "../../components/Otp/Otp";
+import Loader from "../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
 	const [reSend, setReSend] = useState(false);
 	const [email, setEmail] = useState("");
 	const [notification, setNotification] = useState();
+	const [loader,setLoader] = useState(false)
 
 	const handleSubmitEmail = (e) => {
 		e.preventDefault();
@@ -30,6 +32,7 @@ const Login = () => {
 
 	return (
 		<div className="login">
+			{loader&&<Loader/>}
 			{notification && <Notification message={notification} />}
 			<img src={background} alt="background" className="login-background" />
 			<div className="login-card">

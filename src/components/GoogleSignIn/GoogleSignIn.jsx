@@ -1,26 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
+import { GoogleLogin,GoogleOAuthProvider } from '@react-oauth/google';
+import {jwtDecode} from 'jwt-decode';
+import { googleAuth } from '../../services/services';
+import { contextApp } from '../../context/createContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const GoogleSignIn = () => {
-    const handleCallbackResponse =()=>{
-
+  const navigation = useNavigate()
+    const globalData = useContext(contextApp)
+    const {setValiduser} = globalData
+    const handleLogin =(res)=>{
+      console.log(jwtDecode(res.credential))
+      const result = googleAuth(res.credential)
+      if(result){
+        setValiduser(true);
+        navigation('/dashboard')
+      }
+       
     }
-    
-    useEffect(()=>{
-        const google = window.google
-          google.accounts.id.initialize({
-            
-            client_id:process.env.REACT_APP_GOOGLE_CLINT_ID,
-            callback: handleCallbackResponse
-          })
-      
-          google.accounts.id.renderButton(
-            document.getElementById("signIn"),
-            {theme:"outline",size:"large",width: "300", logo_alignment: "center"}
-          )
-        
-      },[])
+  
   return (
-    <div id="signIn"></div>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLINT_ID}>
+      <GoogleLogin
+          width="300px"
+          text="signin_with"
+          onSuccess={credentialResponse => {
+            handleLogin(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+      />
+    </GoogleOAuthProvider>
   )
 }
 

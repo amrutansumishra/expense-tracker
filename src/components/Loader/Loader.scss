@@ -1,0 +1,37 @@
+.loader-container{
+  height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.4);
+}
+.loader {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  display: block;
+  margin:15px auto;
+  position: absolute;
+  color: #fff;
+  background-color: transparent;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite alternate;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: -50px -20px ,  -16px 0,  16px 0, 50px 0;
+  }
+  33% {
+    box-shadow: -50px 0px, -16px -12px,  16px 0, 50px 0;
+  }
+  66% {
+    box-shadow: -50px 0px , -16px 0, 16px -12px, 50px 0;
+  }
+  100% {
+    box-shadow: -50px 0 , -16px 0, 16px 0 , 50px -20px;
+  }
+}
