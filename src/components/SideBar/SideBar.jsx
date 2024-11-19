@@ -7,7 +7,7 @@ import home from '../../assets/icons/home.svg'
 import detail from '../../assets/icons/detail.svg'
 import poweroff from '../../assets/icons/poweroff.svg'
 
-const SideBar = () => {
+const SideBar = ({active}) => {
 
   const [logout,setLogout] = useState(false)
 
@@ -20,13 +20,14 @@ const SideBar = () => {
         </div>
         <div className='side_bar_menu'>
         
-              <Link className='side_bar_menu_items side_bar_menu_active' to="/dashboard">
+              <Link className={active===1?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'} to="/dashboard">
               <img src={home} alt="img"/>Dashboard</Link>
             
-              <Link className='side_bar_menu_items' to="/transaction"><img src={detail} alt="img"/>  Transactions</Link>
+              <Link className={active===2?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'}  to="/transaction">
+                <img src={detail} alt="img"/>  Transactions</Link>
             
         
-              <Link className='side_bar_menu_items' to="/profile">
+              <Link className={active===3?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'}  to="/profile">
               <box-icon name="user"></box-icon>  Profile
               </Link>
          

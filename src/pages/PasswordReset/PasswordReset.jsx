@@ -1,28 +1,23 @@
 import React, { useState } from "react";
-import "./Login.css";
-// import background from "../../assets/images/login-background.jpg";
+import "./PasswordReset.css";
+import background from "../../assets/images/login-background.jpg";
 import wave from "../../assets/icons/wave.svg";
 import Notification from "../../components/Notification/Notification";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
+import Otp from "../../components/Otp/Otp";
 import Loader from "../../components/Loader/Loader";
 import { Link } from "react-router-dom";
-import {userAuth, googleAuth} from '../../services/services';
-import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const PasswordReset = () => {
+	const [passcode, setPasscode] = useState(false);
+	const [reSend, setReSend] = useState(false);
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const [notification, setNotification] = useState();
 	const [loader,setLoader] = useState(false)
-	const navigation = useNavigate()
 
-	const handleSubmit = (e) => {
+	const handleSubmitEmail = (e) => {
 		e.preventDefault();
-		setNotification("Please Enter Valid Email");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
-		if (e.target.email.value.length < 4) {
+		if (e.target.email.length < 4) {
 			setNotification("Please Enter Valid Email");
 			setTimeout(() => {
 				setNotification("");
@@ -30,46 +25,16 @@ const Login = () => {
 		} else {
 			console.log(e.target.email.value);
 			setEmail(e.target.email.value);
-			setPassword(e.target.password.value);
-			userLogin(e.target.email.value,e.target.password.value)
+			setPasscode(true);
+			setReSend((prevValue) => !prevValue);
 		}
 	};
-
-	const userLogin = async()=>{
-		setLoader(true)
-		const result = await userAuth({email,password})
-		setLoader(false)
-		if(result?.data?.success){
-			sessionStorage.setItem("authToken",result.data.token)
-			navigation('/dashboard')
-		}else{
-			setNotification("Invalid Credentials");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
-		}
-	}
-
-	const socialLogin =async(res)=>{
-		setLoader(true)
-		const result = await googleAuth(res.credential)
-		setLoader(false)
-		if(result.data?.success){
-			sessionStorage.setItem("authToken",result.data?.token)
-			navigation('/dashboard')
-		}else{
-			setNotification("Invalid Credentials");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
-		}
-	  }
 
 	return (
 		<div className="login">
 			{loader&&<Loader/>}
 			{notification && <Notification message={notification} />}
-			{/* <img src={background} alt="background" className="login-background" /> */}
+			<img src={background} alt="background" className="login-background" />
 			<div className="login-card">
 				<div className="login-card-content">
 					<div className="login-card-body">
@@ -78,19 +43,51 @@ const Login = () => {
 						</div>
 						<div className="login-card-body-content">
 							<h2>Welcome Back!</h2>
-									<GoogleSignIn socialLogin={socialLogin} text="signin_with" />
+							{passcode ? (
+								<>
+									<div className="login-message">
+										We have sent verification code to your email {email}{" "}
+										<button
+											className="button-small"
+											onClick={() => setPasscode(false)}
+										>
+											change
+										</button>
+									</div>
+									<div className="login-input">
+										<input
+											type="text"
+											className="otp"
+											placeholder="Verification Code"
+											autoComplete="off"
+											maxLength="6"
+											id="otp"
+											name="otp"
+											required
+										/>
+									</div>
+
+									<div className="login-button">
+										<button>Submit</button>
+									</div>
+									<div className="login-message">
+										Not recieved your code ?{" "}
+										<Otp active={reSend} email={email} />
+									</div>
+								</>
+							) : (
+								<>
+									<GoogleSignIn />
 									<div className="divider-line">or</div>
 
-									<form onSubmit={(e) => handleSubmit(e)}>
+									<form onSubmit={(e) => handleSubmitEmail(e)}>
 										<div className="login-input">
 											<input
-												type="text"
+												type="email"
 												placeholder="Enter Email"
 												id="email"
 												name="email"
 												required
-												onChange={(e)=>setEmail(e.target.value)}
-												value={email}
 											/>
 										</div>
 										<div className="login-input">
@@ -100,12 +97,11 @@ const Login = () => {
 												id="password"
 												name="password"
 												required
-												onChange={(e)=>setPassword(e.target.value)}
-												value={password}
 											/>
 										</div>
 										<div className="login-checkbox">
-											<input type="checkbox" name="keep-in" /> Remember me
+											<input type="checkbox" name="keep-in" /> Keep me log in
+											until i log out
 										</div>
 										<div className="login-button">
 											<button type="submit" name="submit">
@@ -113,14 +109,19 @@ const Login = () => {
 											</button>
 										</div>
 									</form>
+								</>
+							)}
 
-							
+							{!passcode ? (
 								<div className="sign-up-link">
 									Don't have an account?{" "}
 									<Link to="/signup">
 										<button className="button-small">create one</button>{" "}
 									</Link>
 								</div>
+							) : (
+								<></>
+							)}
 						</div>
 					</div>
 				</div>
@@ -129,4 +130,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default PasswordReset;

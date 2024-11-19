@@ -1,26 +1,28 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './ExpenseTable.css'
 import 'boxicons';
 import Notification from '../Notification/Notification';
+// import { fetchExpense } from '../../services/services';
+// import { resultData } from '../../constants/dummyData';
 
-const ExpenseTable = () => {
+const ExpenseTable = ({expenseData}) => {
+  // const [expenseData,setExpenseData] = useState()
+  // const getExpenses = async()=>{
+  //   const result = await fetchExpense(10)
+  //   console.log(result)
+  //   if(result.data.success){
+  //     setExpenseData(result.data.result)
+  //   }
+  // }
+
+  const handleFilter = (e) =>{
+    console.log(e.target.value)
+  }
+  // useEffect(()=>{
+  //   getExpenses()
+  // },[])
   return (
     <div className='expense-card'>
-        <div className='expense-show-card-main-header'>Expense Summary</div>
-        <div className='expense-show-card'>     
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>This Week</div>
-                <div className='expense-amount'>$7000</div>
-            </div>
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>This Month</div>
-                <div className='expense-amount'>$10000</div>
-            </div>
-            <div className='expense-show-card-body'>
-                <div className='expense-show-card-header'>Last Month</div>
-                <div className='expense-amount'>$9000</div>
-            </div>
-        </div>
         <div className='expense-table-card'>
           <Notification/>
         <div className='filter-row'>
@@ -37,82 +39,41 @@ const ExpenseTable = () => {
                 </button>
                     </div>
                     <div className='filter-select'>
-                        <select>
-                            <option>Today</option>
-                            <option>This Week</option>
-                            <option>This month</option>
+                        <select onChange={handleFilter}>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This month</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div className='expense-table'>
+              <div className='expense-table-content'>
+
+              
             
             <table>
-              <tbody>
+              <thead>
               <tr className='table-header'>
         <th>Expense</th>
         <th>Category</th>
         <th>Date</th>
         <th>Amount</th>
       </tr>
-      <tr>
-        <td>Peter</td>
-        <td>Griffin</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Lois</td>
-        <td>Griffin</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Joe</td>
-        <td>Swanson</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
-      <tr>
-        <td>Cleveland</td>
-        <td>Brown</td>
-        <td>12/12/2024</td>
-        <td>$250</td>
-      </tr>
+              </thead>
+              <tbody>   
+      {expenseData?expenseData.map((data,index)=>
+        <tr key={`expense-row-${index}`}>
+          <td>{data.name}</td>
+          <td>{data.category}</td>
+          <td>{data.date}</td>
+          <td><span>&#8377;</span>{data.amount}</td>
+        </tr>):<></>}
       
               </tbody>
      
     </table>
+    </div>
             </div>
         </div>
        

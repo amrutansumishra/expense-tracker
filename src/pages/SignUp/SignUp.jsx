@@ -1,26 +1,95 @@
 import React, { useState } from "react";
-import background from "../../assets/images/login-background.jpg";
-import GoogleSignUp from "../../components/GoogleSignUp/GoogleSignUp";
+// import background from "../../assets/images/login-background.jpg";
+import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
+import Otp from "../../components/Otp/Otp";
 import wave from "../../assets/icons/wave.svg";
 import { Link } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import Notification from "../../components/Notification/Notification";
+import {userRegister, googleAuth,sentOtp} from '../../services/services';
+import { useNavigate } from 'react-router-dom';
 import "./SignUp.css";
 
 const SignUp = () => {
 	const [passcode, setPasscode] = useState(false);
 	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [name, setName] = useState("");
+	const [notification, setNotification] = useState();
+	const [loader,setLoader] = useState(false)
+
+	const navigation = useNavigate()
+
 	const handleSubmitEmail = (e) => {
 		e.preventDefault();
 		if (e.target.email.length < 4) {
+			setNotification("Please Enter Valid Email");
+			setTimeout(() => {
+				setNotification("");
+			}, 5000);
 		} else {
-			console.log(e.target.email.value);
 			setEmail(e.target.email.value);
-			setPasscode(true);
+			setName(e.target.name.value);
+			setPassword(e.target.password.value);
+			userVerify(e.target.email.value)
 		}
 	};
 
+	const handleSubmitPasscode = async(e) => {
+		e.preventDefault();
+		setLoader(true)
+		const result = await userRegister({name,email,password,otp:e.target.otp.value});
+		setLoader(false)
+			if(result.data.success){
+				sessionStorage.setItem("authToken",result.data.token)
+				navigation('/dashboard')
+			}else{
+				setNotification("Invalid OTP");
+				setTimeout(() => {
+					setNotification("");
+				}, 5000);
+			}
+		};
+
+
+	const userVerify= async(email)=>{
+		setLoader(true)
+		const result = await sentOtp(email)
+		if(result?.data?.success){
+			setPasscode(true);
+			setNotification("OTP send successfully, Please check your inbox.");
+			setTimeout(() => {
+				setNotification("");
+			}, 5000);
+		}else{
+			setNotification("Something Went wrong try again");
+			setTimeout(() => {
+				setNotification("");
+			}, 5000);
+		}
+		setLoader(false)
+	}
+
+	const socialLogin =async(res)=>{
+		setLoader(true)
+		const result = await googleAuth(res.credential)
+		setLoader(false)
+		if(result.data?.success){
+			sessionStorage.setItem("authToken",result.data?.token)
+			navigation('/dashboard')
+		}else{
+			setNotification("Invalid Credentials");
+			setTimeout(() => {
+				setNotification("");
+			}, 5000);
+		}
+	  }
+
 	return (
 		<div className="login">
-			<img src={background} alt="background" className="login-background" />
+			{loader&&<Loader/>}
+			{notification && <Notification message={notification} />}
+			{/* <img src={background} alt="background" className="login-background" /> */}
 			<div className="login-card">
 				<div className="login-card-content">
 					<div className="signup-card-body">
@@ -31,6 +100,7 @@ const SignUp = () => {
 							<h2>Happy to see you!</h2>
 							{passcode ? (
 								<>
+									<form method="POST" onSubmit={(e) => handleSubmitPasscode(e)}>
 									<div className="login-message">
 										We have sent verification code to your email {email}{" "}
 										<button className="button-small" onClick={() => setPasscode(false)}>change</button>
@@ -51,14 +121,19 @@ const SignUp = () => {
 									<div className="login-button">
 										<button>Submit</button>
 									</div>
-									<div className="login-message">Not recieved your code ?</div>
+									<div className="login-message">
+										Not recieved your code ?{" "}
+										<Otp email={email} resendOTP={userVerify}/>
+									</div>
+									</form>
+									
 								</>
 							) : (
 								<>
-									<GoogleSignUp />
+									<GoogleSignIn socialLogin={socialLogin} text="signup_with" />
 									<div className="divider-line">or</div>
 
-									<form onSubmit={(e) => handleSubmitEmail(e)}>
+									<form method="POST" onSubmit={(e) => handleSubmitEmail(e)}>
 										<div className="login-input">
 											<input
 												type="text"
