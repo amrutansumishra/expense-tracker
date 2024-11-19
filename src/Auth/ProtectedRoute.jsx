@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom'
-import { contextApp } from '../context/createContext';
+// import { useStore } from '../context/StoreProvider';
 
 const ProtectedRoute = ({children}) => {
-    const globalData = useContext(contextApp);
-    const {validUser} = globalData
+    const validUser = sessionStorage.getItem("authToken")
+
     const location = useLocation()
     
     if(!validUser) 

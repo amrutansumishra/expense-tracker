@@ -5,7 +5,6 @@ import profile from "../../assets/images/profile.jpg";
 
 import Edit from "../../assets/icons/edit-alt.svg";
 import Camera from "../../assets/icons/camera-plus.svg";
-import { isEditable } from "@testing-library/user-event/dist/utils";
 
 const Profile = () => {
 	const [emailEdit, setEmailEdit] = useState(false);

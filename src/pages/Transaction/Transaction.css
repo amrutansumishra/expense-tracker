@@ -63,7 +63,9 @@
     background-color: #f6f7fb;
     color:#a2a1a1;
     border-radius: 8px;
-    padding: 8px
+    padding: 8px;
+    position:sticky;
+    top:0;
   }
   th:first-child{
     border-radius: 8px 0 0 8px;

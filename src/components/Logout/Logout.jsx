@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import AlertMessage from '../AlertMessage/AlertMessage'
 import { useNavigate } from 'react-router-dom'
 import { googleLogout } from '@react-oauth/google';
-import { contextApp } from '../../context/createContext';
+import { useStore } from '../../context/StoreProvider';
 
 googleLogout();
 
 const Logout = ({show}) => {
-  const globalData = useContext(contextApp)
+  const globalData = useStore()
   const {setValiduser} = globalData
   const navigate = useNavigate();
 

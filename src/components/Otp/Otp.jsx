@@ -1,22 +1,13 @@
 import React,{useEffect,useState,memo} from 'react'
 
-const Otp = ({active,email}) => {
+const Otp = ({email,resendOTP}) => {
     const [isButtonDisabled, setButtonDisabled] = useState(true);
-    const [counter, setCounter] = useState();
-
-    const sendOtpEmail =(email)=>{
-        console.log("email sent code",email)
-        setCounter(10)
-        setButtonDisabled(true)
-      }
+    const [counter, setCounter] = useState(300);
 
       const handleAction=()=>{
-        sendOtpEmail(email)
+        resendOTP(email)
       }
-    console.log("btn")
-    useEffect(()=>{
-        sendOtpEmail(email)
-    },[email])
+
     useEffect(() => {
         let timer;
     
@@ -28,11 +19,11 @@ const Otp = ({active,email}) => {
         // Cleanup interval on component unmount
         return () => clearInterval(timer);
         
-      }, [counter, active,isButtonDisabled]);
+      }, [counter,isButtonDisabled]);
  
     
       useEffect(() => {
-        // Enable the button after 4 minutes (240 seconds)
+        // Enable the button after 5 minutes (300 seconds)
         if (counter === 0) {
           setButtonDisabled(false);
         }
