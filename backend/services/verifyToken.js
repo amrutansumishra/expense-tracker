@@ -6,13 +6,17 @@ const verifyToken = (req,res,next)=>{
     if(!token){
         return res.status(401).json({message:"Token missing, authorization denied"});
     }
-    jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
-        if(err){
-            res.status(403).json({message:"token expired"});
+    try{
+        const decoded = jwt.verify(token,process.env.JWT_SECRET)
+        if(!decoded){
+            res.status(403).json({success:false,message:"Login Again"});
         }
-        req.user = user;
+        req.user = decoded
         next();
-    })
+    }catch(err){
+        res.status(401).json({success:false,message:"Login Again"})
+    }
+    
 }
 
 module.exports = verifyToken;

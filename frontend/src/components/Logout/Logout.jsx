@@ -12,6 +12,7 @@ const Logout = ({show}) => {
   const navigate = useNavigate();
 
     const logoutAction=()=>{
+        sessionStorage.removeItem('authToken');
         console.log("you have been logged out")
         googleLogout();
         setValiduser(false)

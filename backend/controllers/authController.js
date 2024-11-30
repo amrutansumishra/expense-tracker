@@ -10,7 +10,7 @@ exports.loginUser = async (req,res) =>{
     try{
         const user = await userModel.findOne({email:req.body.email,password:req.body.password})
         if(!user){
-           return res.status(401).json({
+           return res.status(400).json({
                 success:false,
                 message:"Wrong credentials"
             })
@@ -18,7 +18,7 @@ exports.loginUser = async (req,res) =>{
         const {password,createdAt,updatedAt,...data} = user._doc;
         jwt.sign({data}, jwtKey,{expiresIn:"2h"},(err,token)=>{
             if(err){
-                res.status(401).json('Something went wrong, please try again after some time.');
+                res.status(503).json('Something went wrong, please try again after some time.');
             }
             res.status(200).json({success:true,...data,token})
         })
@@ -57,7 +57,7 @@ exports.googleLogin = async (req,res) =>{
                 console.log(data,"data")
                 jwt.sign({data}, jwtKey,{expiresIn:"2h"},(err,token)=>{
                     if(err){
-                        res.status(401).json('Something went wrong, please try again after some time.');
+                        res.status(503).json('Something went wrong, please try again after some time.');
                     }
                     res.status(200).json({success:true,email,name,token})
                 })                
@@ -103,7 +103,7 @@ exports.registerUser = async (req,res) =>{
             })
             }            
         }else{
-            res.status(401).json({
+            res.status(400).json({
                 success:false,
                 message:"Wrong Otp."
             })  
