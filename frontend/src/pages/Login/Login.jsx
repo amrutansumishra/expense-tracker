@@ -40,6 +40,7 @@ const Login = () => {
 		const result = await userAuth({email,password})
 		setLoader(false)
 		if(result?.data?.success){
+			console.log(result.data)
 			sessionStorage.setItem("authToken",result.data.token)
 			navigation('/dashboard')
 		}else{

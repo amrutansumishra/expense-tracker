@@ -45,7 +45,6 @@ export const googleAuth = async(token)=>{
 }
 
 export const userAuth = async(data)=>{
-    console.log(data)
     try{
         const result = await axiosInstance.post(`api/login`,{...data})
         return result

@@ -1,68 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import './Expense.scss'
-import { Doughnut } from 'react-chartjs-2';
-import {Chart,ArcElement,Legend} from 'chart.js';
+import React, { useState } from 'react';
+import { addExpense } from '../../services/services';
+import { useStore } from '../../context/StoreProvider';
 import calendar from '../../assets/icons/calendar.svg';
+import './Expense.scss'
 
-Chart.register(ArcElement,Legend);
 
-const Expense = ({expenseData,addNewExpenses}) => {
-  const [expenseAdd,setExpenseAdd] = useState(true)
+const Expense = () => {
+  // const [expenseAdd,setExpenseAdd] = useState(true)
   const [expenseInput,setExpenseInput] = useState({date:new Date(),category:"personal",name:"",amount:""})
-  const [investRatio,setInvestRatio] =useState([0,0])
-  const investRatioCal = (expenseData)=>{
-    console.log(expenseData,"expensedata")
-    let investment = 0
-    let expenseAmount =0
-    expenseData?.map((data,i)=>{
-        if(data.category === "investment"){
-          investment+=data.amount
-        }else{
-          expenseAmount+=data.amount
-        }
-      })
-      setInvestRatio([investment,expenseAmount])
-  }
+  const {setLoader} = useStore()
 
-  useEffect(()=>{
-    
-    investRatioCal(expenseData)
-  },[expenseData])
+  const addExpensesApi = async(inputData)=>{
+    setLoader(true)
+    const result = await addExpense(inputData)
+    console.log(result)
+    if(result.success){
+      console.log("added")
+    }
+    setLoader(false)
+  }
 
   const handleChange = (e)=>{
     setExpenseInput((data)=>({...data,[e.target.name]:e.target.value}))
   }
   const handleSubmit = (e)=>{
     e.preventDefault()
-    addNewExpenses(expenseInput)
     setExpenseInput({date:new Date(),category:"personal",name:"",amount:""})
-    
+    addExpensesApi(expenseInput)
   }
-    const config={
-        data:{
-          labels: ['Investment', 'Expense'],
-            datasets: [{
-            label: '# of Votes',
-            data: investRatio,
-            backgroundColor: [
-              '#b3ba02',
-              '#122080',
-            ],
-            hoverOffset: 3,
-            borderRadius:8,
-            spacing:-5
-          }]
-        },
-       
-        options:{
-            cutout: "85%",
-            plugins:{
-              legend:{
-                position:"bottom"
-              }
-            }
-        }
-      }
 
   return (
     <div className='expense-section'>
@@ -70,9 +35,7 @@ const Expense = ({expenseData,addNewExpenses}) => {
             <h2>Hello Amrutansu,</h2>
             <p>Take a look at your expenses</p>
         </div>
-        {/* {expenseAdd?<div className='expense-chart'>
-            <Doughnut {...config}></Doughnut>
-        </div>: */}
+        {/* <DoughnutCharts/> */}
         <div className='expense-add-form'>
           <form onSubmit={handleSubmit}>
           <div className='input-group-name'>
@@ -98,7 +61,7 @@ const Expense = ({expenseData,addNewExpenses}) => {
                 </div>
           </form>
           </div>
-          {/* } */}
+        
         <div className='expense-footer'>
             <div className='expense-add-button'> 
             {/* <button onClick={()=>setExpenseAdd(!expenseAdd)}><box-icon name="plus"></box-icon>Add a New Expense</button> */}
