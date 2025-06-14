@@ -1,12 +1,13 @@
-.side_bar{
-    width: 200px;
+.side-bar-content{
+    width: 100%;
     height: 95vh;
     display: flex;
     align-items: stretch;
     flex-direction: column;
-    background-color: #dfe1f3;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 0 8px 8px 0;
+    box-sizing: border-box;
 }
 
 
@@ -25,14 +26,16 @@
     display: flex;
     align-items: center;
     margin: 15% 0;
-    padding: 10px;
-    color:#a2a1a1;
+    padding: 10px 20px;
+    color:#000000;
+    font-weight: 500;
+    font-size: 16px;
     gap:12px;
     text-decoration: none;
 }
 .side_bar_menu_active{
-    background-color: #cbd1f1;
-    color: #122080;
+    background-color:  #122080;
+    color: #cbd1f1;
     border-radius: 8px;
 }
 

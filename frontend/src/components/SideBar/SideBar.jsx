@@ -1,41 +1,39 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Logout from '../Logout/Logout';
+import { LuLayoutDashboard } from "react-icons/lu";
+import { LuHandCoins } from "react-icons/lu";
+import { LuLogOut } from "react-icons/lu";
+import { LuUserRoundCog } from "react-icons/lu";
 import './SideBar.css'
-import 'boxicons';
-import home from '../../assets/icons/home.svg'
-import detail from '../../assets/icons/detail.svg'
-import poweroff from '../../assets/icons/poweroff.svg'
 
-const SideBar = ({active}) => {
+const SideBar = () => {
 
-  const [logout,setLogout] = useState(false)
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   return (
     <>
-    {logout&&<Logout show={setLogout}/>}
-    <div className='side_bar'>
-        <div className='side_bar_header'>
-          <div className='logo'>OyeYar</div>
-        </div>
+    {<Logout setShow={setShowLogoutConfirm} displayAlert={showLogoutConfirm} />}
+    <div className='side-bar-content'>
         <div className='side_bar_menu'>
         
-              <Link className={active===1?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'} to="/dashboard">
-              <img src={home} alt="img"/>Dashboard</Link>
+              <NavLink to="/dashboard" end className={({ isActive }) => isActive ? 'side_bar_menu_items side_bar_menu_active' : 'side_bar_menu_items'}>
+                <LuLayoutDashboard size={22}/>Dashboard
+              </NavLink>
             
-              <Link className={active===2?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'}  to="/transaction">
-                <img src={detail} alt="img"/>  Transactions</Link>
-            
-        
-              <Link className={active===3?'side_bar_menu_items side_bar_menu_active':'side_bar_menu_items'}  to="/profile">
-              <box-icon name="user"></box-icon>  Profile
-              </Link>
+              <NavLink to="/transaction" end className={({ isActive }) => isActive ? 'side_bar_menu_items side_bar_menu_active' : 'side_bar_menu_items'}>
+                <LuHandCoins size={22}/>Expense
+              </NavLink>
+
+              <NavLink to="/Profile" end className={({ isActive }) => isActive ? 'side_bar_menu_items side_bar_menu_active' : 'side_bar_menu_items'}>
+                <LuUserRoundCog size={22}/>Profile
+              </NavLink>
          
         </div>
         <div className='side_bar_footer'>
-        <Link className='power-off-button' onClick={()=>setLogout(true)} >
-        <img src={poweroff} alt="img"/> Logout
-              </Link>
+        <NavLink className='power-off-button' onClick={()=>setShowLogoutConfirm(true)} >
+          <LuLogOut/> Logout
+        </NavLink>
         </div>
     </div>
     </>
