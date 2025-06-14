@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import SideBar from "../../components/SideBar/SideBar";
 import Expense from "../../components/Expense/Expense";
 import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
 // import ExpenseHeader from "../../components/ExpenseHeader/ExpenseHeader";
-import Loader from "../../components/Loader/Loader";
 import { fetchExpense } from '../../services/services';
 import { useStore } from "../../context/StoreProvider";
+import Layout from "../../components/Layout/Layout";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -24,9 +23,8 @@ const Dashboard = () => {
   },[])
 
 	return (
+	<Layout>
 		<div className="container">
-      <Loader/>
-			<SideBar active={1} />
 			<div className="dashboard">
 				{/* <div className='Dashboard-header'>seach box</div> */}
 				<div className="dashboard-body">
@@ -38,6 +36,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 		</div>
+		</Layout>
 	);
 };
 

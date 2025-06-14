@@ -1,15 +1,15 @@
 import React from 'react';
 import './AlertMessage.css';
 
-const AlertMessage = ({message,action,show,display}) => {
+const AlertMessage = ({message,action,setShow}) => {
 
 
   const handleCancel = ()=>{
-    show(false)
+    setShow(false)
   }
 
   const handleConfirm =()=>{
-    show(false)
+    setShow(false)
     if(action){
       action()
     }
@@ -18,7 +18,7 @@ const AlertMessage = ({message,action,show,display}) => {
 
   return (
     <div className='alert-card-parent'>
- <div className='alert-card' style={{display:display?"block":"none"}} >
+      <div className='alert-card'>
         <div className='alert-header'>
             {message?message:"Please pass a message ?"}
         </div>
@@ -26,7 +26,7 @@ const AlertMessage = ({message,action,show,display}) => {
             <button className='confirm' onClick={()=>handleConfirm()}> Yes</button>
             <button className='cancel' onClick={()=>handleCancel()}>Cancel</button>
         </div>
-    </div>
+      </div>
     </div>
   )
 }

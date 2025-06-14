@@ -1,27 +1,20 @@
-import React from 'react'
-import AlertMessage from '../AlertMessage/AlertMessage'
-import { useNavigate } from 'react-router-dom'
-import { googleLogout } from '@react-oauth/google';
-import { useStore } from '../../context/StoreProvider';
+// components/Logout/Logout.jsx
+import React from 'react';
+import AlertMessage from '../AlertMessage/AlertMessage';
+import { useLogout } from '../../hooks/useLogout';
 
-googleLogout();
-
-const Logout = ({show}) => {
-  const globalData = useStore()
-  const {setValiduser} = globalData
-  const navigate = useNavigate();
-
-    const logoutAction=()=>{
-        sessionStorage.removeItem('authToken');
-        console.log("you have been logged out")
-        googleLogout();
-        setValiduser(false)
-        navigate('/')
-    }
+const Logout = ({ setShow, displayAlert }) => {
+  const logout = useLogout();
 
   return (
-    <AlertMessage action={logoutAction} message={"Are you sure to logout ?"} show={show} display={true} />
-  )
-}
+    <>
+      {displayAlert && <AlertMessage
+        action={logout}
+        message="Are you sure to logout?"
+        setShow={setShow}
+      />}
+    </>
+  );
+};
 
-export default Logout
+export default Logout;

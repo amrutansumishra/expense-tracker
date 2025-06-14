@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import SideBar from "../../components/SideBar/SideBar";
-import "./Profile.css";
 import profile from "../../assets/images/profile.jpg";
-
 import Edit from "../../assets/icons/edit-alt.svg";
 import Camera from "../../assets/icons/camera-plus.svg";
+import Layout from "../../components/Layout/Layout";
+import "./Profile.css";
 
 const Profile = () => {
 	const [emailEdit, setEmailEdit] = useState(false);
@@ -44,8 +43,8 @@ const Profile = () => {
 		}
 	};
 	return (
+		<Layout>
 		<div className="container">
-		<SideBar active={3} />
 		<div className="profile">
 		<div className="profile-card">
 		<div className="profile-card-body">
@@ -162,6 +161,7 @@ const Profile = () => {
 		</div>
 		</div>
 		</div>
+		</Layout>
 	);
 };
 
