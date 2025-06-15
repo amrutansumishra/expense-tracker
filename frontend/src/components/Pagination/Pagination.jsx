@@ -1,15 +1,16 @@
 import React from 'react';
 import './pagination.scss';
 
-const Pagination = () => {
+const Pagination = ({pageNo,setPageNo,isLastPage}) => {
   return (
     <div className='pagination-content'>
-        <span>Previous</span>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>...</span>
-        <span>Next</span>
+        {pageNo !==1 && 
+        <><span onClick={()=>setPageNo(pageNo-1)}>Previous</span>
+        <span onClick={()=>setPageNo((prev)=>prev-1)}>{pageNo-1}</span></>}
+        <span className='active'>{pageNo}</span>
+        {!isLastPage&&<>
+        <span onClick={()=>setPageNo((prev)=>prev+1)}>{pageNo+1}</span>
+        <span onClick={()=>setPageNo(pageNo+1)}>Next</span></>}
     </div>
   )
 }

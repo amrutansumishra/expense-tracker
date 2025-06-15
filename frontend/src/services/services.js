@@ -1,8 +1,8 @@
 import axiosInstance from '../axios/axiosIntance';
 
-export const fetchExpense = async(limit)=>{
+export const fetchExpense = async(start,end)=>{
     try{
-        const result = await axiosInstance.get(`api/expenses?limit=${limit}`)
+        const result = await axiosInstance.get(`api/expenses`,{params: { startLimit: start, endLimit: end }})
         return result
     }catch(e){
         return (console.log(e))
