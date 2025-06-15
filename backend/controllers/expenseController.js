@@ -4,20 +4,29 @@ const expenseModel = require('../models/expenseModel')
 exports.fetchExpenses = async (req,res)=>{
     try{
         let query ={userId:req.user.data._id}
-        let limit=0
+        let startLimit=0;
+        let endLimit=0;
+        let isLastPage = false;
         if(req.query.startdate && req.query.enddate){
             console.log(req.query.startdate, req.query.enddate)
             query.date = {$gte:new Date(req.query.startdate),$lte:new Date(req.query.enddate)}
         }
-        if(req.query.limit){
-            limit= req.query.limit
+        if(req.query.startLimit && req.query.endLimit   ){
+            startLimit= req.query.startLimit
+            endLimit = parseInt(req.query.endLimit)+1
         }
        
-        var result = await expenseModel.find(query).limit(limit);
-       
+        var result = await expenseModel.find(query).skip(startLimit).limit(endLimit);
+        
+        if(result.length<endLimit){
+            isLastPage=true;
+        }else{
+            result.pop()
+        }
         
         res.status(200).json({
             success:true,
+            isLastPage,
             result
         })
     }catch(err){

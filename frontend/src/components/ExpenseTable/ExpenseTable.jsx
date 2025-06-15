@@ -2,26 +2,31 @@ import React,{useEffect,useState} from 'react'
 import './ExpenseTable.css'
 import 'boxicons';
 import Notification from '../Notification/Notification';
-// import { fetchExpense } from '../../services/services';
+import Pagination from '../../components/Pagination/Pagination';
+import { fetchExpense } from '../../services/services';
 // import { resultData } from '../../constants/dummyData';
 
-const ExpenseTable = ({expenseData}) => {
-  // const [expenseData,setExpenseData] = useState()
-  // const getExpenses = async()=>{
-  //   const result = await fetchExpense(10)
-  //   console.log(result)
-  //   if(result.data.success){
-  //     setExpenseData(result.data.result)
-  //   }
-  // }
+const ExpenseTable = () => {
+  const [expenseData,setExpenseData] = useState()
+  const [isLastPage,setIsLastPage] = useState()
+  const perPageData=2
+  const [pageNo, setPageNo] = useState(1)
+  const getExpenses = async()=>{
+    const result = await fetchExpense(pageNo*perPageData,perPageData)
+    console.log(result)
+    if(result.data.success){
+      setIsLastPage(result.data.isLastPage)
+      setExpenseData(result.data.result)
+    }
+  }
 
   const handleFilter = (e) =>{
     console.log(e.target.value)
   }
-  // useEffect(()=>{
-  //   getExpenses()
-  // },[])
-  return (
+  useEffect(()=>{
+    getExpenses()
+  },[pageNo])
+  return (<>
     <div className='expense-card'>
         <div className='expense-table-card'>
           <Notification/>
@@ -49,8 +54,6 @@ const ExpenseTable = ({expenseData}) => {
             </div>
             <div className='expense-table'>
               <div className='expense-table-content'>
-
-              
             
             <table>
               <thead>
@@ -69,16 +72,16 @@ const ExpenseTable = ({expenseData}) => {
           <td>{data.date}</td>
           <td><span>&#8377;</span>{data.amount}</td>
         </tr>):<></>}
-      
-              </tbody>
-     
+      </tbody>
     </table>
     </div>
             </div>
         </div>
-       
-       
     </div>
+    <div className='pagination-trans'>
+      <Pagination pageNo={pageNo} setPageNo={setPageNo} isLastPage={isLastPage}/>
+    </div>
+    </>
   )
 }
 
