@@ -4,6 +4,38 @@
     flex-direction: column;
     width: 100%;
 }
+.expense-card{
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 100%;
+    margin: 10px 20px 0 0px;
+    padding:10px;
+}
+.expense-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 15px 20px;
+}
+.expense-header .header-text{
+    font-size: 18px;
+    font-weight: 600;
+}
+.see-all-link,.see-all-link:active, .see-all-link:hover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #ebedff;
+    color: #000000;
+    border-radius: 8px;
+    padding: 7px 10px;
+    min-width: 80px;
+}
 .dashboard-body{
     display: flex;
     flex-direction: row;

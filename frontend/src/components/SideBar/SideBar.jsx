@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import Logout from '../Logout/Logout';
-import { LuLayoutDashboard } from "react-icons/lu";
-import { LuHandCoins } from "react-icons/lu";
-import { LuLogOut } from "react-icons/lu";
-import { LuUserRoundCog } from "react-icons/lu";
+import { LuLayoutDashboard, LuHandCoins, LuLogOut,  LuUserRoundCog } from "react-icons/lu";
+import profile from "../../assets/images/profile.jpg";
 import './SideBar.css'
 
 const SideBar = () => {
@@ -15,6 +13,14 @@ const SideBar = () => {
     <>
     {<Logout setShow={setShowLogoutConfirm} displayAlert={showLogoutConfirm} />}
     <div className='side-bar-content'>
+      <div className='side-profile'>
+        <div className='profile-avatar'>
+          <img src={profile} alt="profile-img" />
+        </div>
+        <div className='profile-name'>
+          Amrutansu Mishra
+        </div>
+      </div>
         <div className='side_bar_menu'>
         
               <NavLink to="/dashboard" end className={({ isActive }) => isActive ? 'side_bar_menu_items side_bar_menu_active' : 'side_bar_menu_items'}>

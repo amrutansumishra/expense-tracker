@@ -1,126 +1,83 @@
-.expense-card{
-    border-radius: 8px;
-    width: 100%;
-    margin: 0 32px 0 0px;
-}
-.expense-show-card{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap:16px;
-    
-}
-.expense-show-card-main-header{
-  font-size: 16px;
-  color:#737373;
-  padding:16px 0 16px 16px;
-}
-
-.expense-show-card-body{
-    padding: 8px;
-    border-radius: 8px;
-    width: 30%;
-    background-color: #ffffff;
-    
-}
-
-.expense-show-card-header{
-  font-size: 16px;
-  color:#737373;
-  /* background-color:  #f6f7fb; */
-  background-color: #ebedff;
-  border-radius: 10px;
-  padding: 8px;
-}
-.expense-amount{
-  padding: 8px;
-  font-size: 1.7rem;
-  color: #626262;
-}
-
 .expense-table{
-    padding:10px;
-    background-color: #ffffff;
-    border-radius: 10px;
-}
-.expense-table-content{
-  height: 75vh;
-  overflow-y: scroll;
-}
-.expense-table table{
-    border-collapse: collapse;
     width: 100%;
-  }
-  
-  .table-header{
-    background-color: #f6f7fb;
-    color:#a2a1a1;
-    border-radius: 8px;
-    padding: 8px;
-    position: sticky;
-    top:0;
-  }
-  th:first-child{
-    border-radius: 8px 0 0 8px;
-  }
-  th:last-child{
-    border-radius:0 8px 8px 0;
-  }
-  th{
-    padding: 10px;
-    text-align: left;
-    font-weight: 500;
-    
-  }
-  
-  tr:hover{
-    background-color: #f6f7fb;
-    border-radius: 8px;
-  }
-
- td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ece9e9;
-    font-weight: 400;
-    letter-spacing: 0;
-    color: #909090;
-  }
-  .filter-row{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding:16px 0 16px 16px;
-  }
-  .filter-header{
-    color:#737373;
-  }
-  .filter-options{
+}
+  .expense-rows{
     display: flex;
     flex-direction: row;
-    gap:16px;
-
+    justify-content: space-between;
+    padding: 10px 20px;
   }
-  .action-button button{
-        background-color: #ffffff;
-        color: #a2a1a1;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        border-radius: 10px;
-        font-size: 16px;
-        cursor: pointer;
-  }
+  .expense-rows:hover{
+    background-color: #f6f7fb;
+    border-radius: 8px;
 
-  .filter-select select{
-        background-color: #ffffff;
-        color: #a2a1a1;
-        border: none;
-        padding: 12px;
-        border-radius: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 0;
+    .delete-icon{
+    display: block;
+  }
+  .edit-icon{
+    display: block;
+  }
+  }
+  .expense-col1{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+  }
+  .expense-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: #ebedff;
+  }
+  .expense-text{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+  }
+  .expense-title{
+    font-size: 16px;
+    font-weight: 500;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .expense-date{
+    font-size: 12px;
+    color: #898888;
+  }
+  .expense-col2{
+    display: flex;
+    align-items: center;
+    gap:15px;
+  }
+  .delete-icon{
+    display: none;
+  }
+  .delete-icon:hover{
+    cursor: pointer;
+    color:#af2b2b;
+  }
+  .edit-icon{
+    display: none;
+  }
+  .edit-icon:hover{
+    cursor: pointer;
+    color: #2655ff;
+  }
+  .expense-money{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5c2c2;
+    color:#af2b2b;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 5px 8px;
+    gap: 5px;
+    min-width: 80px;
   }

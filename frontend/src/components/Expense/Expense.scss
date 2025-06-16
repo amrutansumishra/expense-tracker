@@ -6,7 +6,7 @@ $color-background-dark: #122080;
     flex-direction: column;
     padding: 0 32px;
     gap: 5%;
-    width: 25%;
+    width: 35%;
 }
 .expense-add-form{
     width: 100%; 
@@ -66,6 +66,13 @@ $color-background-dark: #122080;
         border: none;
         outline: none;
         cursor: pointer;
+
+        .date-p{
+            position: absolute;
+            right: 9px;
+            top: 9px;
+            font-size: 10px;
+        }
     }
     .input-group-name{
         position: relative;
@@ -96,10 +103,6 @@ $color-background-dark: #122080;
 .expense-section p{
     color:#a2a1a1;
 }
-.expense-footer{
-    background-color: #ffffff;
-    border-radius: 8px;
-}
 .expense-chart{
     display: flex;
     justify-content: center;
@@ -121,30 +124,38 @@ $color-background-dark: #122080;
         cursor: pointer;
     }
 }
-.expense-footer-actions{
+.expense-total{
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     background-color: $color-background;
-    padding: 16px;
     border-radius: 8px;
-    
-    div{
+    margin-top: 10px;
+
+    .total-expense-logo{
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap:12px;
-        color: $color-background-dark;
-        font-size: 14px;
+        color: #cbd1f1;;
+        background-color: $color-background-dark;
+        padding: 8px;
+        margin: 16px;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+    }
+    .total-content{
+        margin: 16px 0;
+    }
+    .total-text{
+        font-size: 16px;
+        color:#a2a1a1;
+        font-weight: 500;
+        padding: 4px;
+    }
+    .total-amount{
+        font-size: 20px;
+        color: #000000;
+        padding: 4px;
     }
 
-    div button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffff;
-        padding: 12px;
-        border-radius: 8px;
-        border: none;
-    }
 }

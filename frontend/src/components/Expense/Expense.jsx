@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { addExpense } from '../../services/services';
 import { useStore } from '../../context/StoreProvider';
-import calendar from '../../assets/icons/calendar.svg';
+import { LuCalendar, LuWallet } from "react-icons/lu";
 import './Expense.scss'
 
 
@@ -31,17 +31,27 @@ const Expense = () => {
 
   return (
     <div className='expense-section'>
-        <div className='expense-header'>
-            <h2>Hello Amrutansu,</h2>
-            <p>Take a look at your expenses</p>
+          <div className='expense-total'>
+            {/* <div className='expense-add-button'>  */}
+            {/* <button onClick={()=>setExpenseAdd(!expenseAdd)}><box-icon name="plus"></box-icon>Add a New Expense</button> */}
+            {/* </div> */}
+            <div className='total-expense-logo'>
+              <LuWallet size={30}/>
+            </div>
+            <div className='total-content'>
+              <div className='total-text'>Total</div>
+              <div className='total-amount'>&#8377;90000</div>
+            </div>
+
         </div>
         {/* <DoughnutCharts/> */}
         <div className='expense-add-form'>
           <form onSubmit={handleSubmit}>
           <div className='input-group-name'>
                     <input type="text" placeholder='Salary house Rent' className='form-input' onChange={handleChange} name="name" value={expenseInput?.name} required />
-                    <label htmlFor="pick-date" className='form-input-date'><img src={calendar} alt="icon-calendar"/>
-                    
+                    <label htmlFor="pick-date" className='form-input-date'>
+                      <LuCalendar size={22}/>
+                      <span className="date-p">{new Date(expenseInput.date).getDate()}</span>
                     </label>
                     <input type="date" id="pick-date" name="date" onChange={handleChange} className='datepicker-input' value={expenseInput?.date}  />
                 </div>
@@ -54,38 +64,21 @@ const Expense = () => {
                       <option value="travel">Travel</option>
                       <option value="food">Food</option>
                       <option value="investment">Investment</option>
+                      <option value="transport">Transport</option>
+                      <option value="utility">Utilities</option>
+                      <option value="debt">Debt Payment</option>
+                      <option value="emi">EMI</option>
+                      <option value="home">Home</option>
+                      <option value="health">Health</option>
+                      <option value="donation">Donation</option>
+                      <option value="trip">Trip</option>
+                      <option value="others">Others</option>
                    </select>
                 </div>
                 <div className='submit-btn'>
                     <button type='submit'>Add Expense</button>
                 </div>
           </form>
-          </div>
-        
-        <div className='expense-footer'>
-            <div className='expense-add-button'> 
-            {/* <button onClick={()=>setExpenseAdd(!expenseAdd)}><box-icon name="plus"></box-icon>Add a New Expense</button> */}
-            </div>
-            <div className='expense-footer-actions'>
-                <div>
-                <button>
-                     <box-icon name="envelope"></box-icon> 
-                </button>
-                Email
-                </div>
-                <div>
-                <button>
-                     <box-icon name="download"></box-icon> 
-                </button>
-                Download
-                </div>
-                <div>
-                <button>
-                     <box-icon name="printer"></box-icon> 
-                </button>
-                Print
-                </div>
-            </div>
         </div>
     </div>
   )
