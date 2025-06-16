@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import Expense from "../../components/Expense/Expense";
 import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
 // import ExpenseHeader from "../../components/ExpenseHeader/ExpenseHeader";
+import { NavLink } from 'react-router-dom';
 import { fetchExpense } from '../../services/services';
 import { useStore } from "../../context/StoreProvider";
 import Layout from "../../components/Layout/Layout";
+import { LuArrowRight } from "react-icons/lu";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -13,7 +15,7 @@ const Dashboard = () => {
   useEffect(()=>{
     const getExpenses = async()=>{
       setLoader(true)
-      const result = await fetchExpense(0)
+      const result = await fetchExpense(1,7)
       if(result?.data?.success){
         setExpenseData(result.data.result)
       }
@@ -31,7 +33,14 @@ const Dashboard = () => {
 						<Expense/>
 						<div className='expense-card'>
 						{/* <ExpenseHeader/> */}
-						<ExpenseTable expenseData={expenseData}/>
+						<ExpenseTable expenseData={expenseData}>
+							<div className="expense-header">
+								<div className="header-text">Recent Transactions</div>
+								<NavLink to="/transaction" className="see-all-link">
+									See All <LuArrowRight/>
+								</NavLink>
+							</div>
+						</ExpenseTable>
 					</div>
 				</div>
 			</div>
