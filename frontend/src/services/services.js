@@ -20,7 +20,7 @@ export const addExpense = async(data)=>{
 
 export const deleteExpense =async(id)=>{
     try{
-        const result = await axiosInstance.delete(`api/expenses`)
+        const result = await axiosInstance.delete(`api/expenses`,{params:{id:id}})
         return result
     }catch(e){
         return (console.log(e))

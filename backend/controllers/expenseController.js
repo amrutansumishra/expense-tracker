@@ -16,7 +16,7 @@ exports.fetchExpenses = async (req,res)=>{
             endLimit = parseInt(req.query.endLimit)+1
         }
        
-        var result = await expenseModel.find(query).skip(startLimit).limit(endLimit);
+        var result = await expenseModel.find(query).sort({ date: -1 }).skip(startLimit).limit(endLimit);
         
         if(result.length<endLimit){
             isLastPage=true;
@@ -90,11 +90,20 @@ exports.updateExpense = async (req,res)=>{
 
 exports.deleteExpense = async (req,res)=>{
     try{
-       
-        const result = await expenseModel.deleteOne({_id:req.params.id})
+        const result = await expenseModel.deleteOne({ 
+            _id: req.query.id,
+            userId: req.user.data._id,
+        })
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Expense not found or not authorized',
+            });
+        }
         res.status(200).json({
-            success:true,
-            result
+            success:true,   
+            message: 'Expense deleted successfully',
         })
     }catch(err){
         res.status(400).json({
