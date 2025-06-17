@@ -15,7 +15,6 @@ const SignUp = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
-	const [notification, setNotification] = useState();
 	const [loader,setLoader] = useState(false)
 
 	const navigation = useNavigate()
@@ -23,10 +22,10 @@ const SignUp = () => {
 	const handleSubmitEmail = (e) => {
 		e.preventDefault();
 		if (e.target.email.length < 4) {
-			setNotification("Please Enter Valid Email");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Please Enter Valid Email",
+				alertType:"danger"
+			});
 		} else {
 			setEmail(e.target.email.value);
 			setName(e.target.name.value);
@@ -44,10 +43,10 @@ const SignUp = () => {
 				sessionStorage.setItem("authToken",result.data.token)
 				navigation('/dashboard')
 			}else{
-				setNotification("Invalid OTP");
-				setTimeout(() => {
-					setNotification("");
-				}, 5000);
+				Notification.show({
+					message:"Invalid OTP",
+					alertType:"danger"
+				});
 			}
 		};
 
@@ -57,15 +56,15 @@ const SignUp = () => {
 		const result = await sentOtp(email)
 		if(result?.data?.success){
 			setPasscode(true);
-			setNotification("OTP send successfully, Please check your inbox.");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"OTP send successfully, Please check your inbox.",
+				alertType:"success"
+			});
 		}else{
-			setNotification("Something Went wrong try again");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Something Went wrong try again.",
+				alertType:"success"
+			});
 		}
 		setLoader(false)
 	}
@@ -78,17 +77,17 @@ const SignUp = () => {
 			sessionStorage.setItem("authToken",result.data?.token)
 			navigation('/dashboard')
 		}else{
-			setNotification("Invalid Credentials");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Invalid Credentials",
+				alertType:"success"
+			});
 		}
 	  }
 
 	return (
 		<div className="login">
 			{loader&&<Loader/>}
-			{notification && <Notification message={notification} />}
+			<Notification/>
 			{/* <img src={background} alt="background" className="login-background" /> */}
 			<div className="login-card">
 				<div className="login-card-content">

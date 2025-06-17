@@ -2,7 +2,7 @@
     right: 0;
     top:0;
 	position: absolute;
-	padding: 5px 15px;
+	padding: 0px 15px;
 	text-align: left;
 	border-radius: 5px;
     box-shadow: 
@@ -13,9 +13,17 @@
 	display: none;
 }
 
-.tn-box-color-1{
+.tn-box-color-success{
+	background: #66bb7b;
+	border: 1px solid #74c26b;
+}
+.tn-box-color-info{
 	background: #ffe691;
 	border: 1px solid #f6db7b;
+}
+.tn-box-color-danger{
+	background: #ff9191;
+	border: 1px solid #f67b7b;
 }
 .tn-progress {
 	width: 0;

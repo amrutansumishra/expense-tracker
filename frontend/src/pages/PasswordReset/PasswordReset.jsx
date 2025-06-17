@@ -12,16 +12,15 @@ const PasswordReset = () => {
 	const [passcode, setPasscode] = useState(false);
 	const [reSend, setReSend] = useState(false);
 	const [email, setEmail] = useState("");
-	const [notification, setNotification] = useState();
 	const [loader,setLoader] = useState(false)
 
 	const handleSubmitEmail = (e) => {
 		e.preventDefault();
 		if (e.target.email.length < 4) {
-			setNotification("Please Enter Valid Email");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Please Enter Valid Email",
+				alertType:"danger"
+			});
 		} else {
 			console.log(e.target.email.value);
 			setEmail(e.target.email.value);
@@ -33,7 +32,7 @@ const PasswordReset = () => {
 	return (
 		<div className="login">
 			{loader&&<Loader/>}
-			{notification && <Notification message={notification} />}
+			<Notification/>
 			<img src={background} alt="background" className="login-background" />
 			<div className="login-card">
 				<div className="login-card-content">

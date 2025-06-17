@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import profile from "../../assets/images/profile.jpg";
+import profile from "../../assets/images/profile.png";
 import Edit from "../../assets/icons/edit-alt.svg";
 import Camera from "../../assets/icons/camera-plus.svg";
 import Layout from "../../components/Layout/Layout";
@@ -86,8 +86,8 @@ const Profile = () => {
 		<div className="profile-form-group">
 		<label className="profile-label">
 		Email{" "}
-		<button onClick={() => handleDisableToggle('email')}>
-		{/* <button onClick={() => setEmailEdit(!emailEdit)}> */}
+		{/* <button onClick={() => handleDisableToggle('email')}> */}
+		<button onClick={() => setEmailEdit(!emailEdit)}>
 		<img src={Edit} alt="edit" />
 		</button>
 		</label>
@@ -97,23 +97,7 @@ const Profile = () => {
 		id=""
 		placeholder="Enter email"
 		value={"rupalimishra@gmail.ocm"}
-		disabled={form.email.isEditable}
-		/>
-		</div>
-		<div className="profile-form-group">
-		<label className="profile-label">
-		Phone{" "}
-		<button onClick={() => setPhoneEdit(!phoneEdit)}>
-		<img src={Edit} alt="edit" />
-		</button>
-		</label>
-		<input
-		type="text"
-		name="phone"
-		placeholder="Enter phone number"
-		value={"9393939393"}
-		id=""
-		disabled={!phoneEdit}
+		disabled={emailEdit}
 		/>
 		</div>
 		<div className="profile-form-group">

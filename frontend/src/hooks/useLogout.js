@@ -4,13 +4,13 @@ import { googleLogout } from '@react-oauth/google';
 import { useStore } from '../context/StoreProvider';
 
 export const useLogout = () => {
-  const { setValiduser } = useStore();
+  const { setUserDetails } = useStore();
   const navigate = useNavigate();
 
   const logout = () => {
     sessionStorage.removeItem('authToken');
     googleLogout();
-    setValiduser(false);
+    setUserDetails({});
     navigate('/');
     console.log('You have been logged out');
   };

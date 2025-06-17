@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
+import Notification from '../Notification/Notification';
 import { addExpense } from '../../services/services';
 import { useStore } from '../../context/StoreProvider';
 import { LuCalendar, LuWallet } from "react-icons/lu";
 import './Expense.scss'
 
 
-const Expense = () => {
+const Expense = ({getExpenses}) => {
   // const [expenseAdd,setExpenseAdd] = useState(true)
   const [expenseInput,setExpenseInput] = useState({date:new Date(),category:"personal",name:"",amount:""})
-  const {setLoader} = useStore()
+  const {setLoader,} = useStore()
 
   const addExpensesApi = async(inputData)=>{
     setLoader(true)
     const result = await addExpense(inputData)
     console.log(result)
-    if(result.success){
-      console.log("added")
+    if(result?.data?.success){
+      getExpenses();
+      Notification.show({
+        message:"Expenase Deleted",
+        alertType:"success"
+      });
     }
     setLoader(false)
   }
@@ -29,7 +34,7 @@ const Expense = () => {
     addExpensesApi(expenseInput)
   }
 
-  return (
+  return (<>
     <div className='expense-section'>
           <div className='expense-total'>
             {/* <div className='expense-add-button'>  */}
@@ -81,6 +86,7 @@ const Expense = () => {
           </form>
         </div>
     </div>
+    </>
   )
 }
 

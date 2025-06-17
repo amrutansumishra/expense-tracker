@@ -8,25 +8,22 @@ import Loader from "../../components/Loader/Loader";
 import { Link } from "react-router-dom";
 import {userAuth, googleAuth} from '../../services/services';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from "../../context/StoreProvider";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [notification, setNotification] = useState();
 	const [loader,setLoader] = useState(false)
+	const {setUserDetails} = useStore() 
 	const navigation = useNavigate()
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setNotification("Please Enter Valid Email");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
 		if (e.target.email.value.length < 4) {
-			setNotification("Please Enter Valid Email");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Please Enter Valid Email",
+				alertType:"danger"
+			});
 		} else {
 			console.log(e.target.email.value);
 			setEmail(e.target.email.value);
@@ -42,12 +39,13 @@ const Login = () => {
 		if(result?.data?.success){
 			console.log(result.data)
 			sessionStorage.setItem("authToken",result.data.token)
+			setUserDetails({name:result?.data?.name, email:result?.data?.email})
 			navigation('/dashboard')
 		}else{
-			setNotification("Invalid Credentials");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Invalid Credentials",
+				alertType:"danger"
+			});
 		}
 	}
 
@@ -59,17 +57,17 @@ const Login = () => {
 			sessionStorage.setItem("authToken",result.data?.token)
 			navigation('/dashboard')
 		}else{
-			setNotification("Invalid Credentials");
-			setTimeout(() => {
-				setNotification("");
-			}, 5000);
+			Notification.show({
+				message:"Invalid Credentials",
+				alertType:"danger"
+			});
 		}
 	  }
 
 	return (
 		<div className="login">
 			{loader&&<Loader/>}
-			{notification && <Notification message={notification} />}
+			<Notification/>
 			{/* <img src={background} alt="background" className="login-background" /> */}
 			<div className="login-card">
 				<div className="login-card-content">

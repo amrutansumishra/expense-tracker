@@ -1,12 +1,23 @@
-import React,{useEffect,useState} from 'react'
-import { LuShoppingBag } from "react-icons/lu";
-import { LuTrendingDown } from "react-icons/lu";
-import { LuTrash2 } from "react-icons/lu";
-import { LuPencilLine } from "react-icons/lu";
+import React,{useState} from 'react'
+import { LuShoppingBag, LuTrendingDown, LuTrash2 } from "react-icons/lu";
+import {deleteExpense} from '../../services/services';
+import Notification from '../Notification/Notification';
 import './ExpenseTable.css';
 // import { resultData } from '../../constants/dummyData';
 
-const ExpenseTable = ({expenseData,children}) => {
+const ExpenseTable = ({expenseData,getExpenses,children}) => {
+  const deleteAExpense = async(id)=>{
+  const result = await deleteExpense(id)
+  console.log(result)
+    if(result.data.success){
+      getExpenses()
+      Notification.show({
+        message:"Expenase Deleted",
+        alertType:"danger"
+      })
+    }
+  }
+
   return (<>
             <div className='expense-table'>
               {children}
@@ -27,11 +38,8 @@ const ExpenseTable = ({expenseData,children}) => {
                     </div>
                   </div>
                   <div className="expense-col2">
-                    <div className='delete-icon'>
-                      <LuTrash2 size={22}/>
-                    </div>
-                    <div className='edit-icon'>
-                      <LuPencilLine size={22}/>
+                    <div className='delete-icon' onClick={()=>deleteAExpense(data._id)}>
+                      <LuTrash2 size={22}/> 
                     </div>
                     <div className="expense-money">
                       - &#8377;{data.amount} <LuTrendingDown/>

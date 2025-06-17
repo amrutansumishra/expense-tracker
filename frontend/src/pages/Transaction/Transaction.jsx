@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react'
-import Notification from '../../components/Notification/Notification';
 import ExpenseTable from '../../components/ExpenseTable/ExpenseTable';
 import Layout from "../../components/Layout/Layout";
 import Pagination from '../../components/Pagination/Pagination';
@@ -33,8 +32,7 @@ const Transaction = () => {
     <Layout>
         <div className="transaction-page">
           <div className="expense-card-content">
-              <Notification />
-              <ExpenseTable expenseData={expenseData}>
+              <ExpenseTable expenseData={expenseData} getExpenses = {getExpenses}>
                 <div className="expense-header">
                   <div className="header-text">All Expenses</div>
                   <NavLink to="/transaction" className="see-all-link">

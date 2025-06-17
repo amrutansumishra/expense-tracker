@@ -1,24 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
-import Logout from '../Logout/Logout';
+import AlertMessage from '../AlertMessage/AlertMessage';
+import { useStore } from '../../context/StoreProvider';
 import { LuLayoutDashboard, LuHandCoins, LuLogOut,  LuUserRoundCog } from "react-icons/lu";
-import profile from "../../assets/images/profile.jpg";
+import { useLogout } from '../../hooks/useLogout';
+import profile from "../../assets/images/profile.png";
 import './SideBar.css'
 
 const SideBar = () => {
 
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const {userDetails} = useStore();
+  const logout = useLogout();
+
+  const handleClickLogout = () => {
+    AlertMessage.show({
+      message: 'Are you sure to logout?',
+      onConfirm: logout,
+      onCancel: () => {},
+    });
+  };
 
   return (
     <>
-    {<Logout setShow={setShowLogoutConfirm} displayAlert={showLogoutConfirm} />}
     <div className='side-bar-content'>
       <div className='side-profile'>
         <div className='profile-avatar'>
           <img src={profile} alt="profile-img" />
         </div>
         <div className='profile-name'>
-          Amrutansu Mishra
+          {userDetails.name}
         </div>
       </div>
         <div className='side_bar_menu'>
@@ -37,7 +47,7 @@ const SideBar = () => {
          
         </div>
         <div className='side_bar_footer'>
-        <NavLink className='power-off-button' onClick={()=>setShowLogoutConfirm(true)} >
+        <NavLink className='power-off-button' onClick={()=>handleClickLogout(true)} >
           <LuLogOut/> Logout
         </NavLink>
         </div>

@@ -11,12 +11,12 @@ export const useStore = ()=>{
 }
 
 export const StoreProvider = ({children})=>{
-    const [validUser,setValiduser] = useState({status:false,userData:{}})
+    const [userDetails,setUserDetails] = useState({})
     const [loader,setLoader] = useState(false)
     const [expenseData,setExpenseData] = useState()
 
     const contextData={
-        validUser,setValiduser,
+        userDetails,setUserDetails,
         loader,setLoader,
         expenseData,setExpenseData
     }
